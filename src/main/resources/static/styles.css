@@ -1,0 +1,117 @@
+/* Estilos globales */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Ajustado para que todo se alinee desde la parte superior */
+    height: 100vh;
+    overflow: hidden; /* Evita desplazamiento innecesario */
+}
+
+/* Contenedor principal */
+.container {
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 600px;
+    box-sizing: border-box;
+    margin-top: 10px; /* Añadido para evitar que se pegue al borde superior */
+    overflow-y: auto; /* Permite desplazarse si hay muchos campos */
+    max-height: 100vh;
+}
+
+/* Título del formulario */
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+/* Estilos del formulario */
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Etiquetas */
+label {
+    font-size: 14px;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+/* Campos de entrada */
+input, select {
+    font-size: 16px;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    transition: border-color 0.3s ease;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Efecto de enfoque en campos */
+input:focus, select:focus {
+    border-color: #4CAF50;
+    outline: none;
+}
+
+/* Botón de submit */
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+/* Estilo del botón volver */
+.volver {
+    background-color: #ccc;
+    color: #333;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.volver:hover {
+    background-color: #bbb;
+}
+
+/* Asegura que los elementos no se desborden */
+input[type="number"] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .container {
+        width: 90%;
+        padding: 15px;
+    }
+
+    input, select, button {
+        font-size: 14px;
+    }
+}
