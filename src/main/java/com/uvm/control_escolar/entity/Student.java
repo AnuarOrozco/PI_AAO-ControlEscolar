@@ -1,4 +1,4 @@
-package com.uvm.control_escolar.entities;
+package com.uvm.control_escolar.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
