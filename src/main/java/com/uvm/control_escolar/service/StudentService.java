@@ -32,7 +32,7 @@ public class StudentService implements IStudentService{
     }
 
     @Override
-    public ResponseEntity<Student> updateStudent(Long id, Student student) {
+    public ResponseEntity<?> updateStudent(Long id, Student student) {
         Optional<Student> studentOptional = studentRepository.findById(id);
 
         if (studentOptional.isPresent()) {
