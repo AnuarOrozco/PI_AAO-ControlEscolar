@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 
 @RestController
-@RequestMapping("/students")
+@RequestMapping("/api/v1/students")
 public class StudentController {
 
     @Autowired
@@ -32,7 +32,7 @@ public class StudentController {
         return ResponseEntity.ok(studentService.getAllStudents());
     }
 
-    @PostMapping("/create")
+    @PostMapping
     public ResponseEntity<?> createStudent(@RequestBody Student student) {
         Student createdStudent = studentService.createStudent(student);
 
@@ -54,7 +54,7 @@ public class StudentController {
         }
     }
 
-    @DeleteMapping
+    @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteStudent(@PathVariable Long id) {
         Student searchStudent = studentService.getStudentById(id);
 
