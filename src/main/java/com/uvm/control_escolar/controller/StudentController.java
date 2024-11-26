@@ -1,68 +1,63 @@
 package com.uvm.control_escolar.controller;
-
 import com.uvm.control_escolar.entity.Student;
 import com.uvm.control_escolar.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 
-@RestController
-@RequestMapping("/api/v1/students")
+@Controller
+@RequestMapping("/students")
 public class StudentController {
 
     @Autowired
     private StudentService studentService;
 
-    @GetMapping("/{id}")
-    public ResponseEntity<?> getStudentById(@PathVariable Long id) {
-        Student student = studentService.getStudentById(id);
 
-        if (student != null) {
-            return ResponseEntity.ok(student);
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
+    @GetMapping("/add")
+    public String showForm(Model model) {
+        model.addAttribute("student", new Student());
+        return "studentForm";
     }
 
+    @PostMapping("/add")
+    public String createStudent(@ModelAttribute("student") Student student) {
+        studentService.createStudent(student);
+        return "redirect:/students"; // Redirigir a la lista de estudiantes despues de crear con exito
+    }
+
+
+    // Mostrar todos los estudiantes en una lista
     @GetMapping
-    public ResponseEntity<?> getAllStudents() {
-        return ResponseEntity.ok(studentService.getAllStudents());
+    public String getAllStudents(Model model) {
+        model.addAttribute("students", studentService.getAllStudents());
+        return "studentList"; // Agregar el nombre de la lista (el html)
     }
 
-    @PostMapping
-    public ResponseEntity<?> createStudent(@RequestBody Student student) {
-        Student createdStudent = studentService.createStudent(student);
-
-        // Devuelve 201 Created con la URI del recurso
-        return ResponseEntity.created(URI.create("/students/" + createdStudent.getId())).body(createdStudent);
-    }
-
-    @PutMapping("/update/{id}")
-    public ResponseEntity<?> updateStudent(@PathVariable Long id, @RequestBody Student student) {
-        Student existingStudent = studentService.getStudentById(id);
-
-        if (existingStudent != null) {
-            student.setId(id);
-            ResponseEntity<?> updatedStudent = studentService.updateStudent(id, student); // Si da error es por esto
-
-            return ResponseEntity.ok(updatedStudent);
+    @GetMapping("/{id}")
+    public String getStudentById(@PathVariable Long id, Model model) {
+        Student student = studentService.getStudentById(id);
+        if (student != null) {
+            model.addAttribute("student", student);
+            return "studentDetail";
         } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+            return "redirect:/students";  // Redirigir si no se encuentra el estudiante
         }
+    }
+
+    @PostMapping("/update/{id}")
+    public String updateStudent(@PathVariable Long id, @ModelAttribute("student") Student student) {
+        student.setId(id);
+        studentService.updateStudent(id, student);
+        return "redirect:/students";  // Redirigir a la lista de estudiantes después de actualizar
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteStudent(@PathVariable Long id) {
-        Student searchStudent = studentService.getStudentById(id);
-
-        if (searchStudent != null) {
-            studentService.deleteStudent(id);
-            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
+    public String deleteStudent(@PathVariable Long id) {
+        studentService.deleteStudent(id);
+        return "redirect:/students";  // Redirigir a la lista de estudiantes después de eliminar
     }
 }
+
