@@ -1,17 +1,17 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agregar Estudiante</title>
-    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
 <div class="container">
     <h1>Control de Alumnos</h1>
 
-    <!-- Aquí usaremos Thymeleaf para manejar el formulario -->
-    <form id="form-estudiante" th:action="@{/api/v1/students}" method="post" th:object="${student}">
+    <!-- Formulario para agregar estudiante -->
+    <form th:action="@{/students/form}" id="form-estudiante" method="post" th:object="${student}">
         <!-- Información personal -->
         <label for="matricula">Matrícula:</label>
         <input type="text" id="matricula" th:field="*{enrollmentNumber}" required><br>
@@ -23,7 +23,7 @@
         <input type="text" id="apellidos" th:field="*{lastName}" required><br>
 
         <label for="curp">CURP:</label>
-        <input type="text" id="curp" th:field="*{curp}" required><br>
+        <input type="text" id="curp" th:field="*{CURP}" required><br>
 
         <label for="fecha-nacimiento">Fecha de Nacimiento:</label>
         <input type="date" id="fecha-nacimiento" th:field="*{dateOfBirth}" required><br>
@@ -69,13 +69,9 @@
     </form>
 
     <br>
-    <a href="studentForm.html">
+    <a href="/students">
         <button class="volver">Volver al Sistema</button>
     </a>
 </div>
-
 </body>
 </html>
-
-
-

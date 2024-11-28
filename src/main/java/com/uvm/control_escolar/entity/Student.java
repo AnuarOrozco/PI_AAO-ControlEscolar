@@ -1,13 +1,16 @@
 package com.uvm.control_escolar.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Data
 @Entity
 @Table(name = "estudiantes")
+@AllArgsConstructor @NoArgsConstructor
 public class Student {
 
     // Identification
@@ -26,11 +29,11 @@ public class Student {
     private String lastName;
 
     @Column(name = "CURP")
-    private String curp;
+    private String CURP;
 
     // Personal Information
     @Column(name = "Fecha_de_nacimiento")
-    private Date dateOfBirth;
+    private LocalDate dateOfBirth;
 
     @Column(name = "genero")
     private String gender;
