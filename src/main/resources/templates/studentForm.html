@@ -10,6 +10,10 @@
 <div class="container">
     <h1>Control de Alumnos</h1>
 
+    <div th:if="${message}" class="flash-message">
+        <p th:text="${message}"></p>
+    </div>
+
     <!-- Formulario para agregar estudiante -->
     <form th:action="@{/students/form}" id="form-estudiante" method="post" th:object="${student}">
         <!-- Información personal -->
